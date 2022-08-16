@@ -1,4 +1,4 @@
-function Invoke-ReflectivePEInjection
+function PowerInjection
 {
     param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$PEBytes,[Parameter(Mandatory=$true,Position=2)][bool]$is64)
     Set-StrictMode -Version 2
