@@ -1,4 +1,4 @@
-# Improved-remote-reflection-injection-scripts
+# 改进的远程反射PE注入脚本
 # 背景
 ___
 > 由于PowerSploit的远程反射注入已经多年没有维护了,而且它也不能在x64的powershell上注入x86的代码  
