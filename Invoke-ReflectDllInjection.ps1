@@ -1,4 +1,4 @@
-function Invoke-ReflectDllInjection
+function Invoke-ReflectiveDllInjection
 {
     param([Parameter(Mandatory=$true,Position=0)][int]$id,[Parameter(Mandatory=$true,Position=1)][Byte[]]$PEBytes,[Parameter(Mandatory=$true,Position=1)][bool]$is64bit)
     Set-StrictMode -Version 2
