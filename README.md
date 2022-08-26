@@ -10,4 +10,4 @@ ____
 
 # Usage
 ___
-`Invoke-ReflectDllInjection $id $PEBytes $is64` 
+`Invoke-ReflectiveDllInjection $id $PEBytes $is64` 
