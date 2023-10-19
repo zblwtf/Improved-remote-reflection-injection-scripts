@@ -15,7 +15,7 @@ $dllBytes = $reader.ReadToEnd();
 iwr -uri $url_loader -OutFile $env:TEMP\loader.dll
 import-module  $env:TEMP\loader.dll
 #two way inject dll  SanAndreas -> [Mr_Robot.oneshot]::RemoteReflectPEInjection(byte[] dllBytes,int processId) or Invoke-ReflectiveDllInjection -PEBytes $dllBytes -id (get-process -name San*).Id
-[Mr_Robot.oneshot]::RemoteReflectPEInjection($dllBytes,(get-process -name San*).Id)
+Invoke-ReflectiveDllInjection -PEBytes $dllBytes -id (get-process -name San*).Id
 
 
 
