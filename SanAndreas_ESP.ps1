@@ -1,4 +1,5 @@
 #from zblwtf
+#example for GTASA:DE ESP
 IEX(iwr -Uri "https://raw.githubusercontent.com/zblwtf/Improved-remote-reflection-injection-scripts/main/Invoke-ReflectDllInjection.ps1");
 
 
@@ -13,8 +14,8 @@ $dllBytes = $reader.ReadToEnd();
 
 iwr -uri $url_loader -OutFile $env:TEMP\loader.dll
 import-module -path $env:TEMP\loader.dll
-#[Mr_Robot.oneshot]::RemoteReflectPEInjection(byte[] dllBytes,int processId)
-%{get-process -name San*}|%{[Mr_Robot.oneshot]::RemoteReflectPEInjection($dllBytes,$_.Id)}
+#two way inject dll  SanAndreas -> [Mr_Robot.oneshot]::RemoteReflectPEInjection(byte[] dllBytes,int processId) or Invoke-ReflectiveDllInjection -PEBytes $dllBytes -id (get-process -name San*).Id
+get-process -name San*|%{[Mr_Robot.oneshot]::RemoteReflectPEInjection($dllBytes,$_.Id)}
 
 
 
