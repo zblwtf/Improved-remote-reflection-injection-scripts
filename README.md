@@ -20,5 +20,5 @@ ___
 ___
 `import-module -path <dllPath> and use [Mr_Robot.oneshot]::RemoteReflectPEInjection32(byte[] PEBytes,int processId)` 
 
-* 这个.Net程序集还有其他的方块可以用（除了InvokeMimikatz,InvokeBypassUAC,GetSystem 因为他们用到了过期的资源地址）
+* 这个.Net程序集还有其他的函数可以用（除了InvokeMimikatz,InvokeBypassUAC,GetSystem 因为他们用到了过期的资源地址）
 
